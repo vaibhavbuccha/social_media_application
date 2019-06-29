@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
+  <script>
+    $().ready(function(){
+      $("#signupform").validate({
+        rules:{
+          username: {
+            required: true,
+            minlength: 2
+          },
+          email: {
+            required: true,
+            email: true
+          },
+          Password:{
+            required:true,
+            minlength:6
+          },
+          Password_con:{
+            required:true,
+            minlength:6,
+            equalTo : "#Password"
+          },
+          gender:{
+            required:true,
+          },
+          Phone:{
+            required:true,
+            number:true,
+            minlength:10,
+            maxlength:10
+          }
+        },
+        messages: {
+          username:{
+            required: "username must be requied",
+            minlength: "minimum length should be 2"
+          },
+          email: {
+            required :"Email is required",
+            email : "Please enter a valid email address"
+          },
+          Password:{
+            required :"password is required",
+            minimum : "password minimum length must be 6"
+          },
+          Password_con:{
+            required :"please confim the password",
+            minimum : "password minimum length must be 6",
+            equalTo : "Please enter Valid Password"
+          },
+          Phone:{
+            required:"phone no is required",
+            number:"please enter a valid number",
+            minlength: "please enter a valid number",
+            maxlength:"please enter a valid number"
+          }
+        },
+        errorPlacement:function(error,element)
+        {
+          if(element.attr("type") == "radio")
+          {
+            error.appendTo( element.next().next('#err'));
+          }
+          else{
+            error.insertAfter( element );
+          }
+        },
+        submitHandler: function(form){
+        form.submit();
+      }
+      });
+      
+    });
+  </script>
+  <title>Document</title>
+</head>
+<body>
+  <h1 style="letter-spacing: 5px;">Registration Form</h1>
+  <form action="" id="signupform">
+    <label for="username">username :</label>
+    <input type="text" name='username' id="username">
+    <br><br>
+    <label for="Email">Email :</label>
+    <input type="email" name='email' id="email">
+    <br><br>
+    <label for="Password">Password :</label>
+    <input type="Password" name='Password' id="Password">
+    <br><br>
+    <label for="Password_con">Password Confirm :</label>
+    <input type="Password" name='Password_con' id="Password_con">
+    <br><br>
+    <label for="Gender">Gender :</label>
+    Male<input type="radio" name="gender" value="Male">
+    Female<input type="radio" name="gender" value="female">
+    <span id="err"></span>
+    <br><br>
+    <label for="Phone">Phone :</label>
+    <input type="Phone" name='Phone' id="Phone">
+    <br><br>
+    <input type="submit" >
+  </form>
+</body>
+</html>
